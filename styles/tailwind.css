@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *:not(input, textarea) {
+    @apply cursor-default;
+  }
+
+  a, button {
+    @apply md:cursor-pointer;
+  }
+}
