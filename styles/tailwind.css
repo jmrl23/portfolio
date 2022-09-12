@@ -7,7 +7,17 @@
     @apply cursor-default;
   }
 
+  body {
+    @apply font-openSans text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900;
+  }
+
   a, button {
     @apply md:cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto max-w-screen-lg;
   }
 }
