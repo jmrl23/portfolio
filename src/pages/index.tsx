@@ -21,7 +21,7 @@ const Home: NextPage<Props> = ({ githubData }: Props) => {
           <p className='mt-4 text-sm md:text-base dark:text-sky-300'>💻&nbsp;&nbsp;Full Stack Web Developer</p>
           <div className="mt-6 flex items-center justify-center md:justify-start">
             <Link href='/About'>
-              <a className='bg-slate-900/90 text-white px-4 py-2 rounded-l hover:bg-slate-900' href="#">Learn more</a>
+              <a className='bg-slate-900/90 text-white dark:bg-black/60 dark:hover:bg-black/80 px-4 py-2 rounded-l hover:bg-slate-900' href="#">Learn more</a>
             </Link>
             <Link href='/contact'>
               <a className='bg-sky-900/90 text-white px-4 py-2 rounded-r hover:bg-sky-900' href="#">Let&apos;s connect</a>            
@@ -29,7 +29,7 @@ const Home: NextPage<Props> = ({ githubData }: Props) => {
           </div>
         </div>
         <div className='w-[200px] h-[200px] md:w-[350px] md:h-[350px] rounded-full overflow-hidden relative'>
-          <Image src={githubData.avatar_url} width={150} height={150} alt='avatar' title='avatar' layout='fill' objectFit='contain' />
+          <Image src={githubData.avatar_url} alt='avatar' title='avatar' layout='fill' objectFit='contain' />
         </div>
       </div>
     </>
