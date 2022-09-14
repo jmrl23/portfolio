@@ -1,14 +1,50 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
+import Header from '../components/contents/Header'
+import Image from 'next/image'
+import Link from 'next/link'
+import GithubData from '../types/githubData'
 
-const Home: NextPage = () => {
+interface Props {
+  githubData: GithubData
+}
+
+const Home: NextPage<Props> = ({ githubData }: Props) => {
+
   return (
-    <div className="container px-4 lg:px-0">
-      <h1 className='font-bold text-6xl mt-4 dark:text-sky-300'>Hello, I'm Jomariel</h1>
-      <p className='mt-4 font-bold text-blue-500 dark:text-slate-200'>
-        <span className='font-normal'>💻&#8212; </span>A Full Stack Web Developer. 
-      </p>
-    </div>
+    <>
+      <Header />
+      <div className='container flex flex-col-reverse md:flex-row justify-center md:justify-between items-center min-h-[calc(100vh-12rem)] px-4'>
+        <div className='mt-6 md:mt-0 font-bold text-center md:text-left'>
+          <Link href='/'>
+            <h1 className='text-3xl md:text-5xl'>Jomariel Gaitera</h1>
+          </Link>
+          <p className='mt-4 text-sm md:text-base dark:text-sky-300'>💻&nbsp;&nbsp;Full Stack Web Developer</p>
+          <div className="mt-6 flex items-center justify-center md:justify-start">
+            <Link href='/About'>
+              <a className='bg-slate-900/90 text-white px-4 py-2 rounded-l hover:bg-slate-900' href="#">Learn more</a>
+            </Link>
+            <Link href='/contact'>
+              <a className='bg-sky-900/90 text-white px-4 py-2 rounded-r hover:bg-sky-900' href="#">Let&apos;s connect</a>            
+            </Link>
+          </div>
+        </div>
+        <div className='w-[200px] h-[200px] md:w-[350px] md:h-[350px] rounded-full overflow-hidden relative'>
+          <Image src={githubData.avatar_url} width={150} height={150} alt='avatar' title='avatar' layout='fill' objectFit='contain' />
+        </div>
+      </div>
+    </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const response = await fetch(`${process.env.API}/github`)
+  const githubData = await response.json()
+
+  return {
+    props: {
+      githubData
+    }
+  }
 }
 
 export default Home
