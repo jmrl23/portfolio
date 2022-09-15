@@ -34,7 +34,7 @@ const Home: NextPage<Props> = ({ githubData }: Props) => {
           </div>
         </div>
         <div className='w-[200px] h-[200px] md:w-[350px] md:h-[350px] rounded-full overflow-hidden relative'>
-          <Image src={githubData.avatar_url} alt='avatar' title='avatar' layout='fill' objectFit='contain' />
+          <Image src={githubData.avatar_url} alt='avatar' title='avatar' layout='fill' objectFit='contain' priority={true} />
         </div>
       </div>
       <Footer />
