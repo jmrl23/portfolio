@@ -12,7 +12,6 @@ export default function Document () {
       <body>
         <Main />
         <NextScript />
-        <script src='/js/darkmode.js' async={true}></script>
       </body>
     </Html>
   )
