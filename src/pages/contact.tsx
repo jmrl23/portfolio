@@ -68,10 +68,10 @@ const Contact: NextPage = () => {
           <h1 className='border-l-4 pl-4 border-sky-400 font-bold mb-4 text-lg'>Get In Touch</h1>
           <form className='dark:text-slate-900' onSubmit={sendEmail}>
             <div className='flex flex-col md:flex-row gap-4 mb-4'>
-              <input type="text" name="name" placeholder='Name' className='w-full rounded p-4 bg-gray-200 dark:bg-white border-2 border-sky-400 border-dashed dark:border-none focus:outline-none' />
-              <input type="email" name="email" placeholder='E-mail' className='w-full rounded p-4 bg-gray-200 dark:bg-white border-2 border-sky-400 border-dashed dark:border-none focus:outline-none' />
+              <input type="text" name="name" placeholder='Name' className='w-full rounded p-4 bg-gray-50 dark:bg-white border-2 border-sky-400 border-dashed dark:border-none focus:outline-none' />
+              <input type="email" name="email" placeholder='E-mail' className='w-full rounded p-4 bg-gray-50 dark:bg-white border-2 border-sky-400 border-dashed dark:border-none focus:outline-none' />
             </div>
-            <textarea className='p-4 rounded h-[calc(100vh-17rem)] resize-none w-full bg-gray-200 dark:bg-white border-2 border-sky-400 border-dashed dark:border-none focus:outline-none' name="message" placeholder='Message'></textarea>
+            <textarea className='p-4 rounded h-[calc(100vh-17rem)] resize-none w-full bg-gray-50 dark:bg-white border-2 border-sky-400 border-dashed dark:border-none focus:outline-none' name="message" placeholder='Message'></textarea>
             <div className='flex flex-row-reverse mt-2'>
               <button className='flex gap-x-2 bg-slate-900/95 hover:bg-slate-900 dark:bg-black/70 text-white px-4 py-2 rounded leading-7 dark:hover:bg-black/90' type="submit">
                 Send
