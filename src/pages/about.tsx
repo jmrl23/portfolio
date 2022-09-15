@@ -18,13 +18,13 @@ const About: NextPage<Props> = ({ pinnedRepos }: Props) => {
         <section>
           <h1 className='border-l-4 pl-4 border-sky-400 font-bold mb-4 text-lg'>Now</h1>
           <p>
-            Currently a third-year college student at <a className='text-sky-400' href='#'>Pateros Technological College</a>.
+            Currently a third-year college student at <a className='text-sky-400' href='https://www.facebook.com/ptc1993/' target='_blank' rel="noreferrer">Pateros Technological College</a>.
           </p>
           <p>
-            I knew about web development when I was in high school and keep learning more and more as time passes.
+            I discovered web development when I was in highschool, I keep on learning as time passes.
           </p>
           <p>
-            I am now confident in making a useful and reliable websites with the help of my experience.
+            I can now confidently make useful and reliable websites.
           </p>
         </section>
         <section className='mt-4'>
