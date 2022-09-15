@@ -4,9 +4,7 @@ import { useEffect, useState } from 'react'
 export default function Header() {
 
   const [sideNavActive, setSideNavActive] = useState(false)
-  const [theme, setTheme] = useState(
-    (typeof localStorage !== 'undefined' && (localStorage.theme === 'dark' || (!('theme' in localStorage)) && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? 'dark' : 'light'
-  )
+  const [theme, setTheme] = useState('light')
 
   const toggleTheme = () => {
     try {
@@ -18,6 +16,9 @@ export default function Header() {
   }
 
   useEffect(() => {
+    setTheme(
+      (typeof localStorage !== 'undefined' && (localStorage.theme === 'dark' || (!('theme' in localStorage)) && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? 'dark' : 'light'
+    )
     if (sideNavActive) document.body.classList.add('overflow-hidden')
     else document.body.classList.remove('overflow-hidden')
     if (theme === 'dark') document.documentElement.classList.add('dark')
@@ -62,7 +63,7 @@ export default function Header() {
         </button>
       </div>
       
-      <div className={`fixed z-40 bg-black/30 left-0 top-0 w-screen h-screen ${sideNavActive ? void 0 : 'hidden'}`} onClick={() => setSideNavActive(false)}></div>
+      <div className={`fixed z-40 bg-black/30 left-0 top-0 w-screen h-screen ${sideNavActive ? '' : 'hidden'}`} onClick={() => setSideNavActive(false)}></div>
 
       <div className={`fixed z-50 right-0 top-0 bg-white dark:bg-slate-800 dark:text-white h-full flex flex-col text-slate-900 transition-transform ${sideNavActive ? void 0 : 'translate-x-full'}`}>
         <div className='flex justify-between'>

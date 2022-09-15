@@ -14,7 +14,7 @@ const Home: NextPage<Props> = ({ githubData }: Props) => {
   return (
     <>
       <Header />
-      <div className='container flex flex-col-reverse md:flex-row justify-center md:justify-between items-center min-h-[calc(100vh-4rem)] px-4'>
+      <div className='container flex flex-col-reverse md:flex-row justify-center md:justify-between items-center min-h-[calc(100vh-4rem)] px-4 py-4'>
         <div className='mt-6 md:mt-0 font-bold text-center md:text-left'>
           <Link href='/'>
             <h1 className='text-3xl md:text-5xl'>Jomariel Gaitera</h1>
