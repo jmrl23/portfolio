@@ -30,9 +30,9 @@ const About: NextPage<Props> = ({ pinnedRepos }: Props) => {
         <section className='mt-4'>
           <h1 className='border-l-4 pl-4 border-sky-400 font-bold mb-4 text-lg'>Tech Stacks</h1>
           <p className='mb-2'>
-            Here are some of the technologies I'm using:
+            Here are some of the technologies I&apos;m using:
           </p>
-          <Image src='/assets/image/skillsicon.svg' width={273} height={48} />
+          <Image src='/assets/image/skillsicon.svg' width={273} height={48} alt='List of techstacks' />
         </section>
         <section className='mt-4'>
           <h1 className='border-l-4 pl-4 border-sky-400 font-bold mb-4 text-lg'>Works</h1>
