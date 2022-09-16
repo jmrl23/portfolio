@@ -12,6 +12,15 @@ const Contact: NextPage = () => {
     const name = form?.name?.value.trim()
     const email = form?.email?.value.trim()
     const message = form.message.value.trim()
+    const toastConfig = {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    }
     try {
       const response = await fetch('/api/email/send', {
         method: 'POST',
@@ -21,38 +30,20 @@ const Contact: NextPage = () => {
         body: JSON.stringify({ name, email, message })
       })
       const data = await response.json()
-      const { error, error: errorMessage } = data
+      const { error, message: errorMessage } = data
       if (error) {
-        toast.error(errorMessage, {
-          position: "top-right",
-          autoClose: 2500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        })
+        if (Array.isArray(errorMessage)) {
+          for (const message of errorMessage) {
+            toast.error(message, toastConfig)
+          }
+        } else {
+          toast.error(errorMessage, toastConfig)
+        }
       } else {
-        toast.success('✔ Message sent', {
-          position: "top-right",
-          autoClose: 2500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        })
+        toast.success('Sent!', toastConfig)
       }
     } catch (error: any) {
-      toast.error(error.message, {
-        position: "top-right",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
+      toast.error(error.message, toastConfig)
     } finally {
       form.name.value = ''
       form.email.value = ''
