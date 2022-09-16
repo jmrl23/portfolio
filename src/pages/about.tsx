@@ -42,7 +42,7 @@ const About: NextPage<Props> = ({ pinnedRepos }: Props) => {
                 return (
                   <Link href={repo.link} key={repo.link}>
                     <a target='_blank' className='hover:scale-[1.0125] transition-all duration-75 shadow-md dark:shadow-none'>
-                      <Image src={repo.image} width={1090} height={545} className='rounded md:cursor-pointer' alt={repo.repo} title={repo.repo} />
+                      <Image src={repo.image} width={1090} height={545} className='dark:rounded md:cursor-pointer' alt={repo.repo} title={repo.repo} />
                     </a>
                   </Link>
                 )
