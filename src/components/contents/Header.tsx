@@ -65,7 +65,7 @@ export default function Header() {
       
       <div className={`fixed z-40 bg-black/30 left-0 top-0 w-screen h-screen ${sideNavActive ? '' : 'hidden'}`} onClick={() => setSideNavActive(false)}></div>
 
-      <div className={`fixed z-50 right-0 top-0 bg-white dark:bg-slate-800 dark:text-white h-full flex flex-col text-slate-900 transition-transform ${sideNavActive ? void 0 : 'translate-x-full'}`}>
+      <div className={`fixed z-50 right-0 top-0 bg-white dark:bg-slate-800 dark:text-white h-full flex flex-col text-slate-900 transition-transform ${sideNavActive ? '' : 'translate-x-full'}`}>
         <div className='flex justify-between'>
           <button type='button' className="hover:text-red-500 p-4 pb-0" onClick={toggleTheme}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`w-6 h-6 md:cursor-pointer stroke-yellow-500 ${theme === 'dark' ? 'hidden' : ''}`}>
