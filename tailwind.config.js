@@ -2,13 +2,8 @@ import tailwindCssAnimate from 'tailwindcss-animate';
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: ['class'],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-  ],
+  content: ['./src/**/*.tsx', './index.html'],
+  darkMode: ['selector'],
   prefix: '',
   theme: {
     container: {
@@ -19,6 +14,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        mono: ['"Ubuntu Mono"', 'monospace'],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
