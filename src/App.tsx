@@ -3,6 +3,7 @@ import Footer from '@/Footer';
 import Header from '@/Header';
 import Content from '@/Content';
 import Navigation from '@/Navigation';
+import { Toaster } from 'react-hot-toast';
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <Content />
       <Footer />
       <Navigation />
+      <Toaster />
     </ThemeProvider>
   );
 }
