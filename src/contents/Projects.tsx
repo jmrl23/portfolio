@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import {
   Card,
   CardHeader,
@@ -5,11 +6,14 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/ui/card';
-import { Badge, LinkIcon, CodeIcon } from 'lucide-react';
+import { LinkIcon, CodeIcon } from 'lucide-react';
 
 export default function Projects() {
   return (
-    <div className='container py-6 space-y-6'>
+    <div
+      className='container py-6 space-y-6 min-h-[calc(100vh-4rem)] scroll-mt-14'
+      id='projects'
+    >
       <h1 className='font-extrabold text-4xl mb-6'>Projects</h1>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
         <Card>
