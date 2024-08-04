@@ -7,20 +7,21 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { Circle, CircleCheck } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Navigation() {
   const [activeNav, setActiveNav] = useState<number>(0);
-  const contents = useMemo(
-    () => [
+  const [contents, setContents] = useState<Array<HTMLDivElement | null>>([]);
+
+  useEffect(() => {
+    setContents([
       document.querySelector<HTMLDivElement>('#introduction'),
       document.querySelector<HTMLDivElement>('#about-me'),
       document.querySelector<HTMLDivElement>('#technologies'),
       document.querySelector<HTMLDivElement>('#projects'),
       document.querySelector<HTMLDivElement>('#contact'),
-    ],
-    [],
-  );
+    ]);
+  }, []);
 
   useEffect(
     function () {
@@ -32,13 +33,12 @@ export default function Navigation() {
         );
         const min = Math.min(...abs);
         const index = abs.indexOf(min);
-        console.log(index);
         setActiveNav(index);
       }
 
       window.addEventListener('scroll', onScroll);
 
-      return function () {
+      return () => {
         window.removeEventListener('scroll', onScroll);
       };
     },
@@ -56,7 +56,7 @@ export default function Navigation() {
               <Button
                 variant={'ghost'}
                 size={'sm'}
-                className='bg-transparent hover:bg-transparent'
+                className='bg-transparent hover:bg-transparent cursor-default md:cursor-pointer'
                 onClick={() => {
                   contents.at(index)?.scrollIntoView({
                     behavior: 'smooth',
