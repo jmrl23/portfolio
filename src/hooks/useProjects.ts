@@ -14,7 +14,22 @@ interface Project {
 const projectImages: {
   name: string;
   urls: string[];
-}[] = [];
+}[] = [
+  {
+    name: 'fastify-template',
+    urls: [
+      'https://ik.imagekit.io/0x17/portfolio/Screenshot_from_2024-08-06_06-07-46_jtSvDWy9m6.png',
+      'https://ik.imagekit.io/0x17/portfolio/Screenshot_from_2024-08-06_06-07-55_UieJp0DgUU.png',
+    ],
+  },
+  {
+    name: 'express-template',
+    urls: [
+      'https://ik.imagekit.io/0x17/portfolio/Screenshot_from_2024-08-06_06-09-42_HzRE-aS7To.png',
+      'https://ik.imagekit.io/0x17/portfolio/Screenshot_from_2024-08-06_06-09-51_Y1FRUoVtGR.png',
+    ],
+  },
+];
 
 async function getPinnedRepositories(): Promise<Project[]> {
   try {
