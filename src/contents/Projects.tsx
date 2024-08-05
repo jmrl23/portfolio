@@ -34,7 +34,7 @@ export default function Projects() {
                     <SquareArrowOutUpRightIcon className='w-4 h-4' />
                   </a>
                 </CardTitle>
-                <div className='w-full h-[200px] bg-gray-500 rounded'></div>
+                <div className='w-full h-[200px] bg-gray-500 rounded-3xl' />
                 <CardDescription className='text-foreground'>
                   <Skeleton className='w-full h-4' />
                 </CardDescription>
@@ -61,7 +61,7 @@ export default function Projects() {
                   <SquareArrowOutUpRightIcon className='w-4 h-4' />
                 </a>
               </CardTitle>
-              <div className='w-full h-[200px] bg-gray-500 rounded'></div>
+              <div className='w-full h-[200px] bg-gray-500 rounded-3xl' />
               <CardDescription className='text-foreground'>
                 {project.description}
               </CardDescription>
