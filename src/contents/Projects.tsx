@@ -6,9 +6,14 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/ui/card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel';
 import { Skeleton } from '@/components/ui/skeleton';
 import useProjects from '@/hooks/useProjects';
-import { SquareArrowOutUpRightIcon } from 'lucide-react';
+import { ImageOffIcon, SquareArrowOutUpRightIcon } from 'lucide-react';
 
 export default function Projects() {
   const { data: projects, isPending } = useProjects();
@@ -49,7 +54,7 @@ export default function Projects() {
             </Card>
           ))}
         {projects.map((project) => (
-          <Card className='border-none shadow-none' key={project.name}>
+          <Card className='border-none shadow-none' key={project.id}>
             <CardHeader className='space-y-6'>
               <CardTitle className='text-lg'>
                 <a
@@ -61,7 +66,36 @@ export default function Projects() {
                   <SquareArrowOutUpRightIcon className='w-4 h-4' />
                 </a>
               </CardTitle>
-              <div className='w-full h-[200px] bg-gray-500 rounded-3xl' />
+              <Carousel className='w-full'>
+                <CarouselContent>
+                  {project.images.length > 0 ? (
+                    project.images.map((url) => (
+                      <CarouselItem key={url}>
+                        <Card className='rounded-3xl'>
+                          <CardContent className='flex aspect-video items-center justify-center p-0'>
+                            <img
+                              src={url}
+                              alt={project.name}
+                              width={200}
+                              height={200}
+                              className='w-full rounded-3xl'
+                            />
+                          </CardContent>
+                        </Card>
+                      </CarouselItem>
+                    ))
+                  ) : (
+                    <CarouselItem>
+                      <Card className='rounded-3xl'>
+                        <CardContent className='flex aspect-video items-center justify-center p-0'>
+                          <ImageOffIcon className='w-12 h-12' />
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  )}
+                </CarouselContent>
+              </Carousel>
+              {/* <div className='w-full h-[200px] bg-gray-500 rounded-3xl' /> */}
               <CardDescription className='text-foreground'>
                 {project.description}
               </CardDescription>

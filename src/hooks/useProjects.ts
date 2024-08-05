@@ -2,7 +2,7 @@ import { api } from '@/lib/axios';
 import { useQuery } from '@tanstack/react-query';
 
 interface Project {
-  id: number;
+  id: string;
   name: string;
   description: string;
   url: string;
@@ -12,7 +12,7 @@ interface Project {
 
 // hardcoded images
 const projectImages: {
-  id: number;
+  name: string;
   urls: string[];
 }[] = [];
 
@@ -24,7 +24,7 @@ async function getPinnedRepositories(): Promise<Project[]> {
     const repos = response.data.projects;
     const projects: Project[] = repos.map((repo) => ({
       ...repo,
-      images: projectImages.find(({ id }) => id === repo.id)?.urls ?? [],
+      images: projectImages.find(({ name }) => name === repo.name)?.urls ?? [],
     }));
 
     return projects;
