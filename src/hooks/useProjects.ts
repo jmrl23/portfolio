@@ -1,21 +1,33 @@
+import { api } from '@/lib/axios';
 import { useQuery } from '@tanstack/react-query';
 
-interface Repository {
-  author: string;
+interface Project {
+  id: number;
   name: string;
   description: string;
-  language: string;
-  stars: number;
-  forks: number;
+  url: string;
+  images: string[];
+  languages: string[];
 }
 
-async function getPinnedRepositories(): Promise<Repository[]> {
+// hardcoded images
+const projectImages: {
+  id: number;
+  urls: string[];
+}[] = [];
+
+async function getPinnedRepositories(): Promise<Project[]> {
   try {
-    // TODO: make own backend endpoint
-    const response = await fetch('https://pinned.berrysauce.me/get/jmrl23');
-    if (!response.ok) return [];
-    const repositories = await response.json();
-    return repositories;
+    const response = await api.get<{
+      projects: Omit<Project, 'images'>[];
+    }>('/github/projects');
+    const repos = response.data.projects;
+    const projects: Project[] = repos.map((repo) => ({
+      ...repo,
+      images: projectImages.find(({ id }) => id === repo.id)?.urls ?? [],
+    }));
+
+    return projects;
   } catch (error) {
     return [];
   }
