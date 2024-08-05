@@ -6,7 +6,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Circle, CircleCheck } from 'lucide-react';
+import { CircleDotIcon, CircleIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function Navigation() {
@@ -46,7 +46,7 @@ export default function Navigation() {
   );
 
   return (
-    <nav className='fixed -right-2 md:right-0 top-0 mr-2 h-full space-y-4 flex flex-col justify-center'>
+    <nav className='fixed -right-2 md:right-0 top-0 lg:mr-2 h-full space-y-4 flex flex-col justify-center'>
       <ThemeToggle className='bg-transparent hover:bg-transparent' />
       <div className='text-center'>&#x2022;</div>
       {navItems.map((item, index) => (
@@ -64,9 +64,9 @@ export default function Navigation() {
                 }}
               >
                 {activeNav === index ? (
-                  <CircleCheck className='w-4 h-4 md:w-6 md:h-6 cursor-default md:cursor-pointer text-orange-500' />
+                  <CircleDotIcon className='w-4 h-4 lg:w-6 lg:h-6 cursor-default md:cursor-pointer text-orange-500' />
                 ) : (
-                  <Circle className='w-4 h-4 md:w-6 md:h-6 cursor-default md:cursor-pointer' />
+                  <CircleIcon className='w-4 h-4 lg:w-6 lg:h-6 cursor-default md:cursor-pointer hover:text-sky-500' />
                 )}
               </Button>
             </TooltipTrigger>

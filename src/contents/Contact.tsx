@@ -78,7 +78,7 @@ export default function Contact() {
       id='contact'
     >
       <h1 className='font-extrabold text-4xl mb-6'>Contact</h1>
-      <p>
+      <p className='leading-loose'>
         Reach me out directly at{' '}
         <a
           className='underline decoration-orange-500 hover:decoration-sky-500 underline-offset-8'
@@ -86,12 +86,12 @@ export default function Contact() {
         >
           gaiterajomariel@gmail.com
         </a>{' '}
-        or fillout the form below.
+        or fill out the form below.
       </p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='lg:max-w-screen-sm lg:mx-auto'
+          className='md:max-w-screen-sm md:mx-auto'
         >
           <FormField
             control={form.control}
@@ -145,7 +145,7 @@ export default function Contact() {
               </FormItem>
             )}
           />
-          <div className='flex mt-4 justify-end'>
+          <div className='flex mt-6 justify-end'>
             <Button
               type='submit'
               className={cn('flex gap-x-2 font-bold', isSending && 'pl-3')}
