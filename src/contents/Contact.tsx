@@ -152,7 +152,7 @@ export default function Contact() {
               disabled={isSending}
             >
               {isSending && <LoaderIcon className='w-4 h-4 animate-spin' />}
-              <span>Send email</span>
+              <span>Send message</span>
             </Button>
           </div>
         </form>
