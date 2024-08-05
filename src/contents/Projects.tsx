@@ -39,10 +39,8 @@ export default function Projects() {
                     <SquareArrowOutUpRightIcon className='w-4 h-4' />
                   </a>
                 </CardTitle>
-                <div className='w-full h-[200px] bg-gray-500 rounded-3xl' />
-                <CardDescription className='text-foreground'>
-                  <Skeleton className='w-full h-4' />
-                </CardDescription>
+                <div className='w-full h-[300px] lg:h-[200px] bg-gray-500 rounded-3xl' />
+                <Skeleton className='w-full h-4' />
               </CardHeader>
               <CardContent>
                 <div className='flex flex-wrap gap-2'>
@@ -95,7 +93,6 @@ export default function Projects() {
                   )}
                 </CarouselContent>
               </Carousel>
-              {/* <div className='w-full h-[200px] bg-gray-500 rounded-3xl' /> */}
               <CardDescription className='text-foreground'>
                 {project.description}
               </CardDescription>
