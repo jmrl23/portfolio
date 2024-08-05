@@ -73,12 +73,12 @@ export default function Contact() {
   }
 
   return (
-    <div className='container py-6 space-y-6 min-h-screen' id='contact'>
-      <h1 className='font-extrabold text-4xl mb-6'>Contact</h1>
-      <p className='leading-loose'>
+    <div className='container py-6 min-h-screen' id='contact'>
+      <h1 className='font-extrabold text-4xl'>Contact</h1>
+      <p className='leading-loose text-muted-foreground mt-6 mb-10'>
         Reach me out directly at{' '}
         <a
-          className='underline decoration-orange-500 hover:decoration-sky-500 underline-offset-8'
+          className='underline decoration-orange-500 hover:decoration-sky-500 hover:text-foreground underline-offset-8'
           href='mailto:gaiterajomariel@gmail.com'
         >
           gaiterajomariel@gmail.com
@@ -131,7 +131,7 @@ export default function Contact() {
                 <FormLabel className='font-bold'>Message</FormLabel>
                 <FormControl>
                   <Textarea
-                    className='resize-none h-[300px]'
+                    className='resize-none h-[400px] lg:h-[350px]'
                     placeholder='Aa'
                     disabled={isSending}
                     {...field}

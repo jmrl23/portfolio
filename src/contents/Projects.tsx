@@ -14,9 +14,11 @@ export default function Projects() {
   const { data: projects, isPending } = useProjects();
 
   return (
-    <div className='container py-6 space-y-6 min-h-screen' id='projects'>
+    <div className='container py-6 min-h-screen' id='projects'>
       <h1 className='font-extrabold text-4xl mb-6'>Projects</h1>
-      <p className='text-muted-foreground'>GitHub pinned repositories</p>
+      <p className='leading-loose text-muted-foreground my-6'>
+        GitHub pinned repositories
+      </p>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
         {isPending &&
           Array.from({ length: 6 }).map((_, index) => (

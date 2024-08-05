@@ -9,6 +9,7 @@ export default function Content() {
       <Introduction />
       <Technologies />
       <Projects />
+      <hr />
       <Contact />
     </main>
   );

@@ -13,9 +13,9 @@ import {
 export default function Technologies() {
   return (
     <div className='bg-secondary'>
-      <div className='container py-6 space-y-6 min-h-screen' id='technologies'>
+      <div className='container py-6 min-h-screen' id='technologies'>
         <h1 className='font-extrabold text-4xl'>Technologies</h1>
-        <p className='text-muted-foreground pb-16 md:pb-36'>
+        <p className='leading-loose text-muted-foreground mt-6 mb-16 lg:mb-24'>
           These are the technologies I am currently using
         </p>
         <div className='fill-foreground min-h-[300px] flex items-center justify-center gap-8 gap-y-12 lg:gap-16 flex-wrap max-w-screen-md mx-auto'>
