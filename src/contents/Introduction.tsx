@@ -1,7 +1,7 @@
 export default function Introduction() {
   return (
     <div
-      className='container min-h-[calc(100vh-4rem)] flex justify-center flex-col max-w-screen-md scroll-mt-14'
+      className='container min-h-screen flex justify-center flex-col max-w-screen-md'
       id='introduction'
     >
       <div className='space-y-6 text-center'>

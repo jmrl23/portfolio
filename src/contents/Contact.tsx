@@ -73,10 +73,7 @@ export default function Contact() {
   }
 
   return (
-    <div
-      className='container py-6 space-y-6 min-h-[calc(100vh-4rem)] scroll-mt-14'
-      id='contact'
-    >
+    <div className='container py-6 space-y-6 min-h-screen' id='contact'>
       <h1 className='font-extrabold text-4xl mb-6'>Contact</h1>
       <p className='leading-loose'>
         Reach me out directly at{' '}

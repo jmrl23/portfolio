@@ -16,7 +16,6 @@ export default function Navigation() {
   useEffect(() => {
     setContents([
       document.querySelector<HTMLDivElement>('#introduction'),
-      document.querySelector<HTMLDivElement>('#about-me'),
       document.querySelector<HTMLDivElement>('#technologies'),
       document.querySelector<HTMLDivElement>('#projects'),
       document.querySelector<HTMLDivElement>('#contact'),
@@ -80,7 +79,6 @@ export default function Navigation() {
 
 const navItems = [
   { name: 'Introduction' },
-  { name: 'About me' },
   { name: 'Technologies' },
   { name: 'Projects' },
   { name: 'Contact' },
