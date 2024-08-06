@@ -19,7 +19,7 @@ export default function Projects() {
   const { data: projects, isPending } = useProjects();
 
   return (
-    <div className='container py-6 min-h-screen' id='projects'>
+    <div className='container pt-6 min-h-screen' id='projects'>
       <h1 className='font-extrabold text-4xl mb-6'>Projects</h1>
       <p className='leading-loose text-muted-foreground my-6'>
         GitHub pinned repositories
@@ -39,7 +39,7 @@ export default function Projects() {
                     <SquareArrowOutUpRightIcon className='w-4 h-4' />
                   </a>
                 </CardTitle>
-                <div className='w-full h-[300px] lg:h-[200px] bg-gray-500 rounded-3xl' />
+                <Skeleton className='w-full h-[300px] lg:h-[200px] rounded-3xl' />
                 <Skeleton className='w-full h-4' />
               </CardHeader>
               <CardContent>

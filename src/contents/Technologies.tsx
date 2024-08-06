@@ -18,12 +18,14 @@ export default function Technologies() {
         <p className='leading-loose text-muted-foreground mt-6 mb-16 lg:mb-24'>
           These are the technologies I am currently using
         </p>
-        <div className='fill-foreground min-h-[300px] flex items-center justify-center gap-8 gap-y-12 lg:gap-16 flex-wrap max-w-screen-md mx-auto'>
+        <div className='fill-foreground px-6 flex items-center justify-center gap-8 gap-y-12 md:gap-20 lg:gap-x-30 flex-wrap max-w-screen-md mx-auto'>
           {technologies.map((technology) => (
             <Dialog key={technology.name}>
               <DialogTrigger asChild>
                 <div className='flex flex-col items-center space-y-2 cursor-pointer hover:text-orange-500 dark:hover:text-sky-500 hover:fill-orange-500 dark:hover:fill-sky-500'>
-                  <div className='w-12 h-12'>{technology.icon}</div>
+                  <div className='w-12 h-12 md:w-16 md:h-16'>
+                    {technology.icon}
+                  </div>
                   <p className='text-center'>{technology.name}</p>
                 </div>
               </DialogTrigger>
