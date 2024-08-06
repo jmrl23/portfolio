@@ -1,10 +1,10 @@
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
+  CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
 } from '@/components/ui/card';
 import {
   Carousel,
@@ -66,7 +66,7 @@ export default function Projects() {
                   <SquareArrowOutUpRightIcon className='w-4 h-4' />
                 </a>
               </CardTitle>
-              <Carousel className='w-full'>
+              <Carousel className='w-full' opts={{ loop: true }}>
                 <CarouselContent>
                   {project.images.length > 0 ? (
                     project.images.map((url, index) => (
@@ -94,8 +94,12 @@ export default function Projects() {
                     </CarouselItem>
                   )}
                 </CarouselContent>
-                <CarouselPrevious className='translate-x-16 bg-background' />
-                <CarouselNext className='-translate-x-16 bg-background' />
+                {project.images.length > 1 && (
+                  <>
+                    <CarouselPrevious className='translate-x-16' />
+                    <CarouselNext className='-translate-x-16' />
+                  </>
+                )}
               </Carousel>
               <CardDescription className='text-foreground text-base'>
                 {project.description}

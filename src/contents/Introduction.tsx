@@ -30,7 +30,7 @@ export default function Introduction() {
           </p>
           <div className='flex flex-col lg:flex-row gap-6 items-center'>
             <Button
-              variant={'outline'}
+              variant={'default'}
               className='pl-3'
               onClick={(e: React.MouseEvent) => {
                 e.preventDefault();
