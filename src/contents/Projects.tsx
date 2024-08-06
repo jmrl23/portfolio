@@ -93,7 +93,7 @@ export default function Projects() {
                   )}
                 </CarouselContent>
               </Carousel>
-              <CardDescription className='text-foreground'>
+              <CardDescription className='text-foreground text-base'>
                 {project.description}
               </CardDescription>
             </CardHeader>

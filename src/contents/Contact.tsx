@@ -13,7 +13,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { api } from '@/lib/axios';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoaderIcon } from 'lucide-react';
+import { AsteriskIcon, LoaderIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -95,9 +95,13 @@ export default function Contact() {
             name={'email'}
             render={({ field }) => (
               <FormItem>
-                <FormLabel className='font-bold'>Email</FormLabel>
+                <FormLabel className='font-bold inline-flex items-center space-x-1'>
+                  <span>Email</span>
+                  <AsteriskIcon className='w-4 h-4 text-red-500' />
+                </FormLabel>{' '}
                 <FormControl>
                   <Input
+                    className='text-base'
                     type='email'
                     placeholder='johndoe@example.com'
                     disabled={isSending}
@@ -114,9 +118,17 @@ export default function Contact() {
             name={'name'}
             render={({ field }) => (
               <FormItem>
-                <FormLabel className='font-bold'>Name</FormLabel>
+                <FormLabel className='font-bold inline-flex items-center space-x-1'>
+                  <span>Name</span>
+                  <AsteriskIcon className='w-4 h-4 text-red-500' />
+                </FormLabel>{' '}
                 <FormControl>
-                  <Input placeholder='John' disabled={isSending} {...field} />
+                  <Input
+                    className='text-base'
+                    placeholder='John'
+                    disabled={isSending}
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription />
                 <FormMessage />
@@ -128,10 +140,13 @@ export default function Contact() {
             name={'message'}
             render={({ field }) => (
               <FormItem>
-                <FormLabel className='font-bold'>Message</FormLabel>
+                <FormLabel className='font-bold inline-flex items-center space-x-1'>
+                  <span>Message</span>
+                  <AsteriskIcon className='w-4 h-4 text-red-500' />
+                </FormLabel>
                 <FormControl>
                   <Textarea
-                    className='resize-none h-[400px] lg:h-[350px]'
+                    className='resize-none h-[400px] lg:h-[350px] text-base'
                     placeholder='Aa'
                     disabled={isSending}
                     {...field}
@@ -147,6 +162,7 @@ export default function Contact() {
               type='submit'
               className={cn('flex gap-x-2 font-bold', isSending && 'pl-3')}
               disabled={isSending}
+              variant={'default'}
             >
               {isSending && <LoaderIcon className='w-4 h-4 animate-spin' />}
               <span>Send message</span>
