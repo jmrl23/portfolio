@@ -1,3 +1,7 @@
+import { Button } from '@/components/ui/button';
+import { DownloadIcon, InfoIcon } from 'lucide-react';
+import toast from 'react-hot-toast';
+
 export default function Introduction() {
   return (
     <div
@@ -11,6 +15,20 @@ export default function Introduction() {
           on creating efficient, effective, and reliable websites. Let's build
           something great together!
         </p>
+        <Button
+          variant={'outline'}
+          className='pl-3'
+          onClick={() =>
+            toast('Not available', {
+              icon: <InfoIcon />,
+            })
+          }
+        >
+          <a className='flex' href='#'>
+            <DownloadIcon className='mr-2 w-6 h-6' />
+            <span className='text-base font-bold'>download resume</span>
+          </a>
+        </Button>
       </div>
     </div>
   );

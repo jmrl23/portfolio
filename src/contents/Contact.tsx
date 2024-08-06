@@ -83,7 +83,7 @@ export default function Contact() {
         >
           gaiterajomariel@gmail.com
         </a>{' '}
-        or fill out the form below.
+        or fill out the form below
       </p>
       <Form {...form}>
         <form
