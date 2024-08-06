@@ -1,5 +1,6 @@
 import { api } from '@/lib/axios';
 import { useQuery } from '@tanstack/react-query';
+import images from '@/lib/projects-images.json';
 
 interface Project {
   id: string;
@@ -10,12 +11,6 @@ interface Project {
   languages: string[];
 }
 
-// hardcoded images
-const projectImages: {
-  name: string;
-  urls: string[];
-}[] = [];
-
 async function getPinnedRepositories(): Promise<Project[]> {
   try {
     const response = await api.get<{
@@ -24,7 +19,7 @@ async function getPinnedRepositories(): Promise<Project[]> {
     const repos = response.data.projects;
     const projects: Project[] = repos.map((repo) => ({
       ...repo,
-      images: projectImages.find(({ name }) => name === repo.name)?.urls ?? [],
+      images: (images as Record<string, string[]>)[repo.name] ?? [],
     }));
 
     return projects;

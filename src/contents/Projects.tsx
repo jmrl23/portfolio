@@ -10,6 +10,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Skeleton } from '@/components/ui/skeleton';
 import useProjects from '@/hooks/useProjects';
@@ -67,16 +69,16 @@ export default function Projects() {
               <Carousel className='w-full'>
                 <CarouselContent>
                   {project.images.length > 0 ? (
-                    project.images.map((url) => (
-                      <CarouselItem key={url}>
+                    project.images.map((url, index) => (
+                      <CarouselItem key={index}>
                         <Card className='rounded-3xl'>
-                          <CardContent className='flex aspect-video items-center justify-center p-0'>
+                          <CardContent className='flex items-center justify-center p-0'>
                             <img
                               src={url}
                               alt={project.name}
                               width={200}
                               height={200}
-                              className='w-full rounded-3xl'
+                              className='w-full rounded-3xl aspect-video object-contain'
                             />
                           </CardContent>
                         </Card>
@@ -92,6 +94,8 @@ export default function Projects() {
                     </CarouselItem>
                   )}
                 </CarouselContent>
+                <CarouselPrevious className='translate-x-16 bg-background' />
+                <CarouselNext className='-translate-x-16 bg-background' />
               </Carousel>
               <CardDescription className='text-foreground text-base'>
                 {project.description}
