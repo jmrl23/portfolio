@@ -16,7 +16,7 @@ export default function Introduction() {
           <img
             src='https://ik.imagekit.io/0x17/portfolio/IMG_20231016_172220_jq8lcJSP6.jpg'
             alt='Jomariel'
-            className='rounded-3xl w-[150px] md:w-[300px] lg:w-[400px]'
+            className='rounded-3xl w-[150px] md:w-[300px] lg:w-[400px] shadow-sm'
             width={300}
             height={300}
           />
