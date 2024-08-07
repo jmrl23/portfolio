@@ -11,24 +11,24 @@ import toast from 'react-hot-toast';
 export default function Introduction() {
   return (
     <div className='container min-h-screen flex items-center' id='introduction'>
-      <div className='grid grid-cols-1 grid-rows-[1fr,auto] lg:grid-cols-2 lg:grid-rows-1 items-center'>
-        <div className='my-6 mx-auto lg:mb-0'>
+      <div className='grid grid-cols-1 grid-rows-[1fr,auto] md:grid-cols-2 md:grid-rows-1 items-center'>
+        <div className='my-6 mx-auto md:mb-0'>
           <img
             src='https://ik.imagekit.io/0x17/portfolio/IMG_20231016_172220_jq8lcJSP6.jpg'
             alt='Jomariel'
-            className='rounded-3xl w-[150px] lg:w-[400px]'
+            className='rounded-3xl w-[150px] md:w-[300px] lg:w-[400px]'
             width={300}
             height={300}
           />
         </div>
-        <div className='space-y-6 text-center lg:text-left max-w-screen-md'>
+        <div className='space-y-6 text-center md:text-left md:mr-4'>
           <h2 className='text-4xl font-extrabold'>Hi, I am Jomariel Gaitera</h2>
           <p className='leading-10 text-xl'>
             I enjoy creating web applications with strong backend systems. I aim
             to build efficient, effective, and reliable websites. Let's make
             something great together!
           </p>
-          <div className='flex flex-col lg:flex-row gap-6 items-center'>
+          <div className='flex flex-col md:flex-row gap-6 items-center'>
             <Button
               variant={'default'}
               className='pl-3'
