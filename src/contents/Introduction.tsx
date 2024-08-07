@@ -51,7 +51,7 @@ export default function Introduction() {
                     <a
                       href='https://github.com/jmrl23'
                       target='_blank'
-                      className='w-6 h-6 fill-foreground'
+                      className='w-6 h-6 fill-primary hover:fill-primary/90'
                     >
                       <svg
                         role='img'
@@ -71,7 +71,7 @@ export default function Introduction() {
                     <a
                       href='https://www.linkedin.com/in/jomariel-gaitera-83035b117/'
                       target='_blank'
-                      className='w-6 h-6 fill-foreground'
+                      className='w-6 h-6 fill-primary hover:fill-primary/90'
                     >
                       <svg
                         role='img'
