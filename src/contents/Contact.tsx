@@ -52,9 +52,9 @@ export default function Contact() {
     if (isSending) return;
 
     let content = '';
-    content += `email: ${email}\n`;
-    content += `name: ${name}\n`;
-    content += `\n${message}\n`;
+    content += `email: ${email.trim()}\n`;
+    content += `name: ${name.trim()}\n`;
+    content += `\n${message.trim()}\n`;
 
     setIsSending(true);
 
@@ -96,7 +96,7 @@ export default function Contact() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className='font-bold inline-flex items-center space-x-1'>
-                  <span>Email</span>
+                  <span className='text-base'>Email</span>
                   <AsteriskIcon className='w-4 h-4 text-red-500' />
                 </FormLabel>{' '}
                 <FormControl>
@@ -119,7 +119,7 @@ export default function Contact() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className='font-bold inline-flex items-center space-x-1'>
-                  <span>Name</span>
+                  <span className='text-base'>Name</span>
                   <AsteriskIcon className='w-4 h-4 text-red-500' />
                 </FormLabel>{' '}
                 <FormControl>
@@ -141,7 +141,7 @@ export default function Contact() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className='font-bold inline-flex items-center space-x-1'>
-                  <span>Message</span>
+                  <span className='text-base'>Message</span>
                   <AsteriskIcon className='w-4 h-4 text-red-500' />
                 </FormLabel>
                 <FormControl>
