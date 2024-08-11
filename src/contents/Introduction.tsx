@@ -5,6 +5,7 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from '@/components/ui/tooltip';
+import { RESUME_URL } from '@/lib/constants';
 import { DownloadIcon, InfoIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -33,13 +34,14 @@ export default function Introduction() {
               variant={'default'}
               className='pl-3'
               onClick={(e: React.MouseEvent) => {
+                if (RESUME_URL !== undefined) return;
                 e.preventDefault();
                 toast('Not available', {
                   icon: <InfoIcon className='text-sky-500' />,
                 });
               }}
             >
-              <a className='flex' href='#'>
+              <a className='flex' href={RESUME_URL ?? '#'} target='_blank'>
                 <DownloadIcon className='mr-2 w-6 h-6' />
                 <span className='text-base font-bold'>download resume</span>
               </a>
