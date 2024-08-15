@@ -13,7 +13,7 @@ import {
 export default function Technologies() {
   return (
     <div className='bg-accent text-accent-foreground'>
-      <div className='container pt-6 min-h-screen' id='technologies'>
+      <div className='container py-6' id='technologies'>
         <h1 className='font-extrabold text-4xl'>Technologies</h1>
         <p className='leading-loose text-muted-foreground mt-6 mb-16 lg:mb-24'>
           These are the technologies I am currently using

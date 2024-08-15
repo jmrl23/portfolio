@@ -1,12 +1,12 @@
 import { Button } from '@/components/ui/button';
 import {
-  TooltipProvider,
   Tooltip,
-  TooltipTrigger,
   TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { RESUME_URL } from '@/lib/constants';
-import { DownloadIcon, InfoIcon } from 'lucide-react';
+import { InfoIcon, ScrollTextIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function Introduction() {
@@ -42,8 +42,8 @@ export default function Introduction() {
               }}
             >
               <a className='flex' href={RESUME_URL ?? '#'} target='_blank'>
-                <DownloadIcon className='mr-2 w-6 h-6' />
-                <span className='text-base font-bold'>download resume</span>
+                <ScrollTextIcon className='mr-2 w-6 h-6' />
+                <span className='text-base font-bold'>view resume</span>
               </a>
             </Button>
             <div className='flex space-x-6'>
