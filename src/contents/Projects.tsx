@@ -43,7 +43,7 @@ export default function Projects() {
                     <SquareArrowOutUpRightIcon className='w-4 h-4' />
                   </a>
                 </CardTitle>
-                <Skeleton className='w-full h-[300px] lg:h-[200px] rounded-3xl' />
+                <Skeleton className='w-full h-[300px] rounded-3xl' />
                 <Skeleton className='w-full h-4' />
               </CardHeader>
               <CardContent>
