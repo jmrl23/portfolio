@@ -14,8 +14,10 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Skeleton } from '@/components/ui/skeleton';
-import useProjects from '@/hooks/useProjects';
+import useProjects, { Project } from '@/hooks/useProjects';
 import { ImageOffIcon, SquareArrowOutUpRightIcon } from 'lucide-react';
+import { useState } from 'react';
+import ImageViewer from 'react-simple-image-viewer';
 
 export default function Projects() {
   const { data: projects, isPending } = useProjects();
@@ -54,67 +56,104 @@ export default function Projects() {
             </Card>
           ))}
         {projects.map((project) => (
-          <Card className='border-none shadow-none' key={project.id}>
-            <CardHeader className='space-y-6'>
-              <CardTitle className='text-lg'>
-                <a
-                  className='inline-flex gap-x-2 items-center hover:underline underline'
-                  target='_blank'
-                  href={project.url}
-                >
-                  {project.name}
-                  <SquareArrowOutUpRightIcon className='w-4 h-4' />
-                </a>
-              </CardTitle>
-              <Carousel className='w-full' opts={{ loop: true }}>
-                <CarouselContent>
-                  {project.images.length > 0 ? (
-                    project.images.map((url, index) => (
-                      <CarouselItem key={index}>
-                        <Card className='rounded-3xl'>
-                          <CardContent className='flex items-center justify-center p-0'>
-                            <img
-                              src={url}
-                              alt={project.name}
-                              width={200}
-                              height={200}
-                              className='w-full rounded-3xl aspect-video object-contain'
-                            />
-                          </CardContent>
-                        </Card>
-                      </CarouselItem>
-                    ))
-                  ) : (
-                    <CarouselItem>
-                      <Card className='rounded-3xl'>
-                        <CardContent className='flex aspect-video items-center justify-center p-0'>
-                          <ImageOffIcon className='w-12 h-12' />
-                        </CardContent>
-                      </Card>
-                    </CarouselItem>
-                  )}
-                </CarouselContent>
-                {project.images.length > 1 && (
-                  <>
-                    <CarouselPrevious className='translate-x-16' />
-                    <CarouselNext className='-translate-x-16' />
-                  </>
-                )}
-              </Carousel>
-              <CardDescription className='text-foreground text-base'>
-                {project.description}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className='flex flex-wrap gap-2'>
-                {project.languages.map((language) => (
-                  <Badge key={language}>{language}</Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          <ProjectCard key={project.id} project={project} />
         ))}
       </div>
     </div>
+  );
+}
+
+interface ProjectCardProps {
+  project: Project;
+}
+
+function ProjectCard({ project }: ProjectCardProps) {
+  const [currentImage, setCurrentImage] = useState<number>(0);
+  const [isViewerOpen, setIsViewerOpen] = useState<boolean>(false);
+
+  function openImageViewer(index: number) {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
+  }
+
+  function closeImageViewer() {
+    setCurrentImage(0);
+    setIsViewerOpen(false);
+  }
+
+  return (
+    <Card className='border-none shadow-none' key={project.id}>
+      <CardHeader className='space-y-6'>
+        <CardTitle className='text-lg'>
+          <a
+            className='inline-flex gap-x-2 items-center hover:underline underline'
+            target='_blank'
+            href={project.url}
+          >
+            {project.name}
+            <SquareArrowOutUpRightIcon className='w-4 h-4' />
+          </a>
+        </CardTitle>
+        <Carousel className='w-full' opts={{ loop: true }}>
+          <CarouselContent>
+            {project.images.length > 0 ? (
+              project.images.map((url, index) => (
+                <CarouselItem
+                  key={index}
+                  onClick={() => {
+                    openImageViewer(index);
+                  }}
+                >
+                  <Card className='rounded-3xl'>
+                    <CardContent className='flex items-center justify-center p-0'>
+                      <img
+                        src={url}
+                        alt={project.name}
+                        width={200}
+                        height={200}
+                        className='w-full rounded-3xl aspect-video object-contain'
+                      />
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))
+            ) : (
+              <CarouselItem>
+                <Card className='rounded-3xl'>
+                  <CardContent className='flex aspect-video items-center justify-center p-0'>
+                    <ImageOffIcon className='w-12 h-12' />
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            )}
+          </CarouselContent>
+          {project.images.length > 1 && (
+            <>
+              <CarouselPrevious className='translate-x-16' />
+              <CarouselNext className='-translate-x-16' />
+            </>
+          )}
+        </Carousel>
+        <CardDescription className='text-foreground text-base'>
+          {project.description}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className='flex flex-wrap gap-2'>
+          {project.languages.map((language) => (
+            <Badge key={language}>{language}</Badge>
+          ))}
+        </div>
+      </CardContent>
+      {isViewerOpen && (
+        <ImageViewer
+          src={project.images}
+          currentIndex={currentImage}
+          disableScroll={false}
+          closeOnClickOutside={true}
+          onClose={closeImageViewer}
+        />
+      )}
+    </Card>
   );
 }

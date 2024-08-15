@@ -2,7 +2,7 @@ import { api } from '@/lib/axios';
 import { useQuery } from '@tanstack/react-query';
 import images from '@/lib/projects-images.json';
 
-interface Project {
+export interface Project {
   id: string;
   name: string;
   description: string;
