@@ -15,10 +15,10 @@ export default function Technologies() {
     <div className='bg-accent text-accent-foreground'>
       <div className='container py-6' id='technologies'>
         <h1 className='font-extrabold text-4xl'>Technologies</h1>
-        <p className='leading-loose text-muted-foreground mt-6 mb-16 lg:mb-24'>
+        <p className='leading-loose text-muted-foreground my-6'>
           These are the technologies I am currently using
         </p>
-        <div className='fill-foreground px-6 flex items-center justify-center gap-8 gap-y-12 md:gap-20 lg:gap-x-30 flex-wrap max-w-screen-md mx-auto'>
+        <div className='fill-foreground px-6 py-8 flex items-center justify-center gap-8 gap-y-12 md:gap-20 lg:gap-x-30 flex-wrap max-w-screen-md mx-auto'>
           {technologies.map((technology) => (
             <Dialog key={technology.name}>
               <DialogTrigger asChild>

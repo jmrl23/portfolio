@@ -43,7 +43,7 @@ export default function Projects() {
                     <SquareArrowOutUpRightIcon className='w-4 h-4' />
                   </a>
                 </CardTitle>
-                <Skeleton className='w-full h-[300px] rounded-3xl' />
+                <Skeleton className='w-full h-[200px] lg:h-[300px] rounded-3xl' />
                 <Skeleton className='w-full h-4' />
               </CardHeader>
               <CardContent>
@@ -105,7 +105,7 @@ function ProjectCard({ project }: ProjectCardProps) {
                   }}
                 >
                   <Card className='rounded-3xl'>
-                    <CardContent className='flex items-center justify-center p-0'>
+                    <CardContent className='flex items-center justify-center p-0 lg:cursor-pointer'>
                       <img
                         src={url}
                         alt={project.name}
