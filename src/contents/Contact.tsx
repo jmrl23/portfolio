@@ -101,7 +101,7 @@ export default function Contact() {
                 </FormLabel>{' '}
                 <FormControl>
                   <Input
-                    className='text-base'
+                    className='text-base border-dashed border-2 border-sky-500 focus:border-sky-600'
                     type='email'
                     placeholder='johndoe@example.com'
                     disabled={isSending}
@@ -124,7 +124,7 @@ export default function Contact() {
                 </FormLabel>{' '}
                 <FormControl>
                   <Input
-                    className='text-base'
+                    className='text-base border-dashed border-2 border-sky-500 focus:border-sky-600'
                     placeholder='John'
                     disabled={isSending}
                     {...field}
@@ -146,7 +146,7 @@ export default function Contact() {
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    className='resize-none h-[400px] lg:h-[350px] text-base'
+                    className='resize-none h-[400px] lg:h-[350px] text-base border-dashed border-2 border-sky-500 focus:border-sky-600'
                     placeholder='Aa'
                     disabled={isSending}
                     {...field}
