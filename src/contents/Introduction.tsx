@@ -15,7 +15,7 @@ export default function Introduction() {
       <div className='grid grid-cols-1 grid-rows-[1fr,auto] md:grid-cols-2 md:grid-rows-1 items-center'>
         <div className='my-6 mx-auto md:mb-0'>
           <img
-            src='https://ik.imagekit.io/0x17/portfolio/IMG_20231016_172220_jq8lcJSP6.jpg'
+            src='https://avatars.githubusercontent.com/u/49666877?v=4'
             alt='Jomariel'
             className='rounded-3xl w-[150px] md:w-[300px] lg:w-[400px] shadow-sm'
             width={300}
