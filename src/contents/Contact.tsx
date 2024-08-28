@@ -10,11 +10,19 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { api } from '@/lib/axios';
 import { cn } from '@/lib/utils';
+import { fileSchema } from '@/schemas/filesSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AsteriskIcon, LoaderIcon } from 'lucide-react';
-import { useState } from 'react';
+import { FromSchema } from 'json-schema-to-ts';
+import { AsteriskIcon, FilesIcon, FileX2Icon, LoaderIcon } from 'lucide-react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
@@ -43,13 +51,33 @@ export default function Contact() {
     },
   });
   const [isSending, setIsSending] = useState<boolean>(false);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [attachments, setAttachments] = useState<{ id: string; url: string }[]>(
+    [],
+  );
+
+  async function handleRemoveAttachments() {
+    try {
+      const ids = attachments.map((attachment) => attachment.id).join('&id=');
+      await api.delete('/files/delete?id=' + ids, {
+        headers: {
+          authorization: `Bearer ${import.meta.env.VITE_PORTFOLIO_API_KEY}`,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      toast.success(`Attachment${attachments.length > 1 ? 's' : ''} removed`);
+      setAttachments([]);
+    }
+  }
 
   async function onSubmit({
     email,
     name,
     message,
   }: z.infer<typeof formSchema>) {
-    if (isSending) return;
+    if (isSending || isUploading) return;
 
     let content = '';
     content += `email: ${email.trim()}\n`;
@@ -59,7 +87,14 @@ export default function Contact() {
     setIsSending(true);
 
     try {
-      await api.post('/webhooks/discord/send-message', { content });
+      await api.post('/emails/send', {
+        subject: 'Portfolio',
+        text: content,
+        to: [import.meta.env.VITE_PORTFOLIO_EMAIL_RECEIVER],
+        attachments: attachments.map((attachment) => ({
+          path: attachment.url,
+        })),
+      });
       toast.success('message sent');
       form.setValue('email', '');
       form.setValue('name', '');
@@ -69,6 +104,7 @@ export default function Contact() {
       toast.error('an error occurs');
     } finally {
       setIsSending(false);
+      setAttachments([]);
     }
   }
 
@@ -157,7 +193,33 @@ export default function Contact() {
               </FormItem>
             )}
           />
-          <div className='flex mt-6 justify-end'>
+          <div className='flex mt-6 justify-between'>
+            {attachments.length < 1 ? (
+              <FileUploader
+                isUploading={isUploading}
+                setIsUploading={setIsUploading}
+                setAttachments={setAttachments}
+              />
+            ) : (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={'outline'}
+                      className='rounded-full px-3'
+                      type='button'
+                      onClick={handleRemoveAttachments}
+                    >
+                      <FileX2Icon className='w-4 h-4' />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Remove {attachments.length} attached file
+                    {attachments.length > 1 && 's'}
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
             <Button
               type='submit'
               className={cn('flex gap-x-2 font-bold', isSending && 'pl-3')}
@@ -170,6 +232,97 @@ export default function Contact() {
           </div>
         </form>
       </Form>
+    </div>
+  );
+}
+
+type $File = FromSchema<typeof fileSchema>;
+
+async function uploadFiles(files: File[]): Promise<$File[]> {
+  const toastId = toast.loading('Uploading attachment(s)');
+  const formData = new FormData();
+  for (const file of files) {
+    formData.append('files', file);
+  }
+  try {
+    const response = await api.post<{ data: $File[] }>(
+      '/files/upload',
+      formData,
+      {
+        headers: {
+          'content-type': 'multipart/form-data',
+          authorization: `Bearer ${import.meta.env.VITE_PORTFOLIO_API_KEY}`,
+        },
+      },
+    );
+    const { data: files } = response.data;
+    toast.dismiss(toastId);
+    toast.success('Uploaded successfully!');
+    return files;
+  } catch (error) {
+    toast.dismiss(toastId);
+    toast.error('An error occurs');
+    console.error(error);
+    return [];
+  }
+}
+
+interface FileUploaderProps {
+  isUploading: boolean;
+  setIsUploading: (value: boolean) => void;
+  setAttachments: (attachments: { id: string; url: string }[]) => void;
+}
+
+function FileUploader({
+  isUploading,
+  setIsUploading,
+  setAttachments,
+}: FileUploaderProps) {
+  const ref = useRef<HTMLInputElement>(null);
+
+  async function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
+    if (isUploading || e.target.files?.length === undefined) return;
+    const files = [...e.target.files[Symbol.iterator]()];
+    if (files.length > 5) {
+      toast.error('Attachments limit is 5');
+      return;
+    }
+    setIsUploading(true);
+    const uploadedFiles = await uploadFiles(files);
+    setAttachments(
+      uploadedFiles.map((file) => ({ id: file.id, url: file.url })),
+    );
+    setIsUploading(false);
+    toast.success(
+      `Attached ${uploadFiles.length} file${uploadFiles.length > 0 ? 's' : ''}`,
+    );
+  }
+
+  return (
+    <div>
+      <input
+        type='file'
+        ref={ref}
+        className='hidden'
+        onChange={handleOnChange}
+        multiple
+      />
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant={'outline'}
+              className='rounded-full px-3'
+              type='button'
+              onClick={() => ref.current?.click()}
+            >
+              <FilesIcon className='w-4 h-4' />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>Add attachments</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </div>
   );
 }

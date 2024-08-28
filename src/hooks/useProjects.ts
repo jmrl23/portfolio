@@ -1,37 +1,31 @@
 import { api } from '@/lib/axios';
+import {
+  projectListPayloadSchema,
+  projectSchema,
+} from '@/schemas/projectsSchema';
 import { useQuery } from '@tanstack/react-query';
-import images from '@/lib/projects-images.json';
+import { FromSchema } from 'json-schema-to-ts';
 
-export interface Project {
-  id: string;
-  name: string;
-  description: string;
-  url: string;
-  images: string[];
-  languages: string[];
-}
+export type Project = FromSchema<typeof projectSchema>;
 
-async function getPinnedRepositories(): Promise<Project[]> {
+export type ProjectListPayload = FromSchema<typeof projectListPayloadSchema>;
+
+async function fetchProjects(payload: ProjectListPayload): Promise<Project[]> {
   try {
-    const response = await api.get<{
-      projects: Omit<Project, 'images'>[];
-    }>('/github/projects');
-    const repos = response.data.projects;
-    const projects: Project[] = repos.map((repo) => ({
-      ...repo,
-      images: (images as Record<string, string[]>)[repo.name] ?? [],
-    }));
-
+    const response = await api.get<{ data: Project[] }>('/projects', {
+      params: payload,
+    });
+    const { data: projects } = response.data;
     return projects;
   } catch (error) {
     return [];
   }
 }
 
-export default function useProjects() {
+export default function useProjects(payload: ProjectListPayload = {}) {
   const { isPending, isError, data, error, refetch } = useQuery({
-    queryKey: ['github', 'repositories', 'pinned'],
-    queryFn: getPinnedRepositories,
+    queryKey: ['projects', JSON.stringify(payload)],
+    queryFn: () => fetchProjects(payload),
   });
 
   return {

@@ -14,19 +14,27 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Skeleton } from '@/components/ui/skeleton';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import useProjects, { Project } from '@/hooks/useProjects';
-import { ImageOffIcon, SquareArrowOutUpRightIcon } from 'lucide-react';
+import { BoxIcon, ImageOffIcon, SquareArrowOutUpRightIcon } from 'lucide-react';
 import { useState } from 'react';
 import ImageViewer from 'react-simple-image-viewer';
 
 export default function Projects() {
-  const { data: projects, isPending } = useProjects();
+  const { data: projects, isPending } = useProjects({
+    take: 6,
+  });
 
   return (
     <div className='container pt-6' id='projects'>
       <h1 className='font-extrabold text-4xl mb-6'>Projects</h1>
       <p className='leading-loose text-muted-foreground my-6'>
-        GitHub pinned repositories
+        Here are my recent projects
       </p>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         {isPending &&
@@ -84,30 +92,49 @@ function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Card className='border-none shadow-none' key={project.id}>
       <CardHeader className='space-y-6'>
-        <CardTitle className='text-lg'>
-          <a
-            className='inline-flex gap-x-2 items-center hover:underline underline'
-            target='_blank'
-            href={project.url}
-          >
-            {project.name}
-            <SquareArrowOutUpRightIcon className='w-4 h-4' />
-          </a>
+        <CardTitle className='text-lg flex items-center justify-between'>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a
+                  className='inline-flex gap-x-2 items-center hover:underline underline'
+                  target='_blank'
+                  href={project.repositoryUrl}
+                >
+                  {project.name}
+                  <SquareArrowOutUpRightIcon className='w-4 h-4' />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent>Repository</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          {project.previewUrl && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <a href={project.previewUrl} target='_blank'>
+                    <BoxIcon />
+                  </a>
+                </TooltipTrigger>
+                <TooltipContent>Preview</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
         </CardTitle>
         <Carousel className='w-full' opts={{ loop: true }}>
           <CarouselContent>
             {project.images.length > 0 ? (
-              project.images.map((url, index) => (
+              project.images.map((image, idx) => (
                 <CarouselItem
-                  key={index}
+                  key={image.id}
                   onClick={() => {
-                    openImageViewer(index);
+                    openImageViewer(idx);
                   }}
                 >
                   <Card className='rounded-3xl'>
                     <CardContent className='flex items-center justify-center p-0 lg:cursor-pointer'>
                       <img
-                        src={url}
+                        src={image.url}
                         alt={project.name}
                         width={200}
                         height={200}
@@ -140,14 +167,14 @@ function ProjectCard({ project }: ProjectCardProps) {
       </CardHeader>
       <CardContent>
         <div className='flex flex-wrap gap-2'>
-          {project.languages.map((language) => (
-            <Badge key={language}>{language}</Badge>
+          {project.topics.map((topic, idx) => (
+            <Badge key={idx}>{topic}</Badge>
           ))}
         </div>
       </CardContent>
       {isViewerOpen && (
         <ImageViewer
-          src={project.images}
+          src={project.images.map((image) => image.url)}
           currentIndex={currentImage}
           disableScroll={false}
           closeOnClickOutside={true}
