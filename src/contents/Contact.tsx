@@ -61,7 +61,7 @@ export default function Contact() {
       const ids = attachments.map((attachment) => attachment.id).join('&id=');
       await api.delete('/files/delete?id=' + ids, {
         headers: {
-          authorization: `Bearer ${import.meta.env.VITE_PORTFOLIO_API_KEY}`,
+          authorization: `Bearer ${import.meta.env.VITE_FILES_API_KEY}`,
         },
       });
     } catch (error) {
@@ -87,14 +87,22 @@ export default function Contact() {
     setIsSending(true);
 
     try {
-      await api.post('/emails/send', {
-        subject: 'Portfolio',
-        text: content,
-        to: [import.meta.env.VITE_PORTFOLIO_EMAIL_RECEIVER],
-        attachments: attachments.map((attachment) => ({
-          path: attachment.url,
-        })),
-      });
+      await api.post(
+        '/emails/send',
+        {
+          subject: 'Portfolio',
+          text: content,
+          to: [import.meta.env.VITE_EMAILS_RECEIVER],
+          attachments: attachments.map((attachment) => ({
+            path: attachment.url,
+          })),
+        },
+        {
+          headers: {
+            authorization: `Bearer ${import.meta.env.VITE_EMAILS_API_KEY}`,
+          },
+        },
+      );
       toast.success('message sent');
       form.setValue('email', '');
       form.setValue('name', '');
@@ -251,13 +259,12 @@ async function uploadFiles(files: File[]): Promise<$File[]> {
       {
         headers: {
           'content-type': 'multipart/form-data',
-          authorization: `Bearer ${import.meta.env.VITE_PORTFOLIO_API_KEY}`,
+          authorization: `Bearer ${import.meta.env.VITE_FILES_API_KEY}`,
         },
       },
     );
     const { data: files } = response.data;
     toast.dismiss(toastId);
-    toast.success('Uploaded successfully!');
     return files;
   } catch (error) {
     toast.dismiss(toastId);
@@ -294,6 +301,7 @@ function FileUploader({
       uploadedFiles.map((file) => ({ id: file.id, url: file.url })),
     );
     setIsUploading(false);
+    if (uploadedFiles.length < 1) return;
     toast.success(
       `Attached ${uploadFiles.length} file${uploadFiles.length > 0 ? 's' : ''}`,
     );

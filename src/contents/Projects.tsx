@@ -27,7 +27,7 @@ import ImageViewer from 'react-simple-image-viewer';
 
 export default function Projects() {
   const { data: projects, isPending } = useProjects({
-    take: 6,
+    take: 12,
   });
 
   return (

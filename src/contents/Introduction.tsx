@@ -5,7 +5,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { RESUME_URL } from '@/lib/constants';
 import { ArrowDownToLineIcon, InfoIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -34,7 +33,7 @@ export default function Introduction() {
               variant={'default'}
               className='pl-3'
               onClick={(e: React.MouseEvent) => {
-                if (RESUME_URL !== undefined) return;
+                if (import.meta.env.VITE_RESUME_URL !== undefined) return;
                 e.preventDefault();
                 toast('Not available', {
                   icon: <InfoIcon className='text-sky-500' />,
@@ -43,7 +42,7 @@ export default function Introduction() {
             >
               <a
                 className='flex'
-                href={RESUME_URL ?? '#'}
+                href={import.meta.env.VITE_RESUME_URL ?? '#'}
                 target='_blank'
                 download
               >
