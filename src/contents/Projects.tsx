@@ -29,26 +29,17 @@ import {
   LoaderIcon,
   SquareArrowOutUpRightIcon,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ImageViewer from 'react-simple-image-viewer';
 
 export default function Projects() {
-  const [isMaxTake, setIsMaxTake] = useState<boolean>(false);
   const [take, setTake] = useState<number>(4);
   const {
     data: projects,
     isLoading,
     isPending,
-  } = useProjects({
-    take,
-    order: 'asc',
-  });
-
-  useEffect(() => {
-    if (take > projects.length) {
-      setIsMaxTake(true);
-    }
-  }, [projects, take]);
+  } = useProjects({ take, order: 'asc' });
+  const isMaxTake = take > projects.length;
 
   return (
     <div className='container pt-6' id='projects'>
