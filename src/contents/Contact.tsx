@@ -221,8 +221,9 @@ export default function Contact() {
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    Remove {attachments.length} attached file
-                    {attachments.length > 1 && 's'}
+                    {attachments.length > 1
+                      ? 'Remove attached files'
+                      : 'Remove attached file'}
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -246,7 +247,9 @@ export default function Contact() {
 type $File = FromSchema<typeof fileSchema>;
 
 async function uploadFiles(files: File[]): Promise<$File[]> {
-  const toastId = toast.loading('Uploading attachment(s)');
+  const uploadingMessage =
+    files.length > 1 ? 'Uploading attachments' : 'Uploading attachment';
+  const toastId = toast.loading(uploadingMessage);
   const formData = new FormData();
   for (const file of files) {
     formData.append('files', file);
@@ -260,16 +263,19 @@ async function uploadFiles(files: File[]): Promise<$File[]> {
           'content-type': 'multipart/form-data',
           authorization: `Bearer ${import.meta.env.VITE_FILES_API_KEY}`,
         },
+        signal: AbortSignal.timeout(1000 * 60 * 2),
       },
     );
     const { data: files } = response.data;
-    toast.dismiss(toastId);
     return files;
   } catch (error) {
-    toast.dismiss(toastId);
-    toast.error('An error occurs');
+    if (error instanceof Error) {
+      toast.error(error.message ?? 'An error occurs');
+    }
     console.error(error);
     return [];
+  } finally {
+    toast.dismiss(toastId);
   }
 }
 
@@ -291,7 +297,7 @@ function FileUploader({
     if (isUploading || e.target.files?.length === undefined) return;
     const files = [...e.target.files[Symbol.iterator]()];
     if (files.length > 5) {
-      toast.error('Attachments limit is 5');
+      toast.error('Only allowed to attach up to 5 files');
       return;
     }
     setIsUploading(true);
@@ -302,7 +308,7 @@ function FileUploader({
     setIsUploading(false);
     if (uploadedFiles.length < 1) return;
     toast.success(
-      `Attached ${uploadFiles.length} file${uploadFiles.length > 0 ? 's' : ''}`,
+      uploadedFiles.length > 1 ? 'Files attached' : 'File attached',
     );
   }
 
