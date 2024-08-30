@@ -26,13 +26,14 @@ async function fetchProjects(payload: ProjectListPayload): Promise<Project[]> {
 }
 
 export default function useProjects(payload: ProjectListPayload = {}) {
-  const { isPending, isError, data, error, refetch } = useQuery({
+  const { isPending, isLoading, isError, data, error, refetch } = useQuery({
     queryKey: ['projects', JSON.stringify(payload)],
     queryFn: () => fetchProjects(payload),
   });
 
   return {
     isPending,
+    isLoading,
     isError,
     data: data ?? [],
     error,

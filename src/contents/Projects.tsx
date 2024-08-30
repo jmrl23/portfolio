@@ -1,4 +1,5 @@
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -21,24 +22,43 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import useProjects, { Project } from '@/hooks/useProjects';
-import { BoxIcon, ImageOffIcon, SquareArrowOutUpRightIcon } from 'lucide-react';
-import { useState } from 'react';
+import { cn } from '@/lib/utils';
+import {
+  BoxIcon,
+  ImageOffIcon,
+  LoaderIcon,
+  SquareArrowOutUpRightIcon,
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
 import ImageViewer from 'react-simple-image-viewer';
 
 export default function Projects() {
-  const { data: projects, isPending } = useProjects({
-    take: 12,
+  const [isMaxTake, setIsMaxTake] = useState<boolean>(false);
+  const [take, setTake] = useState<number>(4);
+  const {
+    data: projects,
+    isLoading,
+    isPending,
+  } = useProjects({
+    take,
+    order: 'asc',
   });
+
+  useEffect(() => {
+    if (take > projects.length) {
+      setIsMaxTake(true);
+    }
+  }, [projects, take]);
 
   return (
     <div className='container pt-6' id='projects'>
       <h1 className='font-extrabold text-4xl mb-6'>Projects</h1>
       <p className='leading-loose text-muted-foreground my-6'>
-        Here are my recent projects
+        Here are some of my projects
       </p>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-        {isPending &&
-          Array.from({ length: 6 }).map((_, index) => (
+        {isLoading &&
+          Array.from({ length: take }).map((_, index) => (
             <Card className='border-none shadow-none' key={index}>
               <CardHeader className='space-y-6'>
                 <CardTitle className='text-lg'>
@@ -66,6 +86,28 @@ export default function Projects() {
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
+      </div>
+      <div className='flex justify-center mt-4'>
+        {isMaxTake ? (
+          <Button className='rounded-full flex' variant={'outline'}>
+            <a
+              href='https://github.com/jmrl23?tab=repositories'
+              target='_blank'
+            >
+              more on github
+            </a>
+          </Button>
+        ) : (
+          <Button
+            className={cn('rounded-full flex gap-x-2', isPending && 'pl-3')}
+            variant={'outline'}
+            onClick={() => setTake((take) => take + 4)}
+            disabled={isPending}
+          >
+            {isPending && <LoaderIcon className='w-4 h-4 animate-spin' />}
+            Load more
+          </Button>
+        )}
       </div>
     </div>
   );
