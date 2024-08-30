@@ -90,7 +90,6 @@ export default function Contact() {
       await api.post(
         '/emails/send',
         {
-          subject: 'Portfolio',
           text: content,
           to: [import.meta.env.VITE_EMAILS_RECEIVER],
           attachments: attachments.map((attachment) => ({
