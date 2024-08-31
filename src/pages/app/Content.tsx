@@ -1,7 +1,7 @@
-import Contact from '@/contents/Contact';
-import Introduction from '@/contents/Introduction';
-import Projects from '@/contents/Projects';
-import Technologies from '@/contents/Technologies';
+import Contact from '@/pages/app/contents/Contact';
+import Introduction from '@/pages/app/contents/Introduction';
+import Projects from '@/pages/app/contents/Projects';
+import Technologies from '@/pages/app/contents/Technologies';
 
 export default function Content() {
   return (

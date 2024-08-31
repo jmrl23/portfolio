@@ -1,21 +1,12 @@
 import ThemeProvider from '@/components/ThemeProvider';
-import Footer from '@/Footer';
-import Content from '@/Content';
-import Navigation from '@/Navigation';
+import Router from '@/Router';
 import { Toaster } from 'react-hot-toast';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-const queryClient = new QueryClient();
 
 export default function App() {
   return (
     <ThemeProvider storageKey='jomariel.portfolio.theme'>
-      <QueryClientProvider client={queryClient}>
-        <Content />
-        <Footer />
-        <Navigation />
-        <Toaster />
-      </QueryClientProvider>
+      <Router />
+      <Toaster />
     </ThemeProvider>
   );
 }
