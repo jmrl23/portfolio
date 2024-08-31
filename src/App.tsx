@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <ThemeProvider defaultTheme='light' storageKey='jomariel.portfolio.theme'>
+    <ThemeProvider storageKey='jomariel.portfolio.theme'>
       <QueryClientProvider client={queryClient}>
         <Content />
         <Footer />

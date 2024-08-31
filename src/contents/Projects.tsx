@@ -29,7 +29,7 @@ import {
   LoaderIcon,
   SquareArrowOutUpRightIcon,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ImageViewer from 'react-simple-image-viewer';
 
 export default function Projects() {
@@ -38,8 +38,13 @@ export default function Projects() {
     data: projects,
     isLoading,
     isPending,
+    refetch,
   } = useProjects({ take, order: 'asc' });
   const isMaxTake = take > projects.length;
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, take]);
 
   return (
     <div className='container pt-6' id='projects'>
@@ -79,16 +84,7 @@ export default function Projects() {
         ))}
       </div>
       <div className='flex justify-center mt-4'>
-        {isMaxTake ? (
-          <Button className='rounded-full flex' variant={'outline'}>
-            <a
-              href='https://github.com/jmrl23?tab=repositories'
-              target='_blank'
-            >
-              more on github
-            </a>
-          </Button>
-        ) : (
+        {!isMaxTake && (
           <Button
             className={cn('rounded-full flex gap-x-2', isPending && 'pl-3')}
             variant={'outline'}
@@ -96,7 +92,7 @@ export default function Projects() {
             disabled={isPending}
           >
             {isPending && <LoaderIcon className='w-4 h-4 animate-spin' />}
-            Load more
+            load more
           </Button>
         )}
       </div>
