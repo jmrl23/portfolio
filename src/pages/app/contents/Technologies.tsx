@@ -12,41 +12,65 @@ import {
 
 export default function Technologies() {
   return (
-    <div className='bg-accent text-accent-foreground'>
-      <div className='container py-6' id='technologies'>
-        <h1 className='font-extrabold text-4xl'>Technologies</h1>
-        <p className='leading-loose text-muted-foreground my-6'>
-          These are the technologies I am currently using
-        </p>
-        <div className='fill-foreground px-6 py-8 flex items-center justify-center gap-8 gap-y-12 md:gap-20 lg:gap-x-30 flex-wrap max-w-screen-md mx-auto'>
-          {technologies.map((technology) => (
-            <Dialog key={technology.name}>
-              <DialogTrigger asChild>
-                <div className='flex flex-col items-center space-y-2 cursor-pointer hover:text-orange-500 dark:hover:text-sky-500 hover:fill-orange-500 dark:hover:fill-sky-500'>
-                  <div className='w-12 h-12 md:w-16 md:h-16'>
-                    {technology.icon}
+    <div>
+      <div className='bg-accent text-accent-foreground'>
+        <div className='container py-6' id='technologies'>
+          <h1 className='font-extrabold text-4xl'>Technologies</h1>
+          <p className='leading-loose text-muted-foreground my-6'>
+            These are the technologies I am currently using
+          </p>
+          <div className='fill-foreground px-6 py-8 flex items-center justify-center gap-8 gap-y-12 md:gap-20 lg:gap-x-30 flex-wrap max-w-screen-md mx-auto'>
+            {technologies.map((technology) => (
+              <Dialog key={technology.name}>
+                <DialogTrigger asChild>
+                  <div className='flex flex-col items-center space-y-2 cursor-pointer hover:text-orange-500 dark:hover:text-sky-500 hover:fill-orange-500 dark:hover:fill-sky-500'>
+                    <div className='w-12 h-12 md:w-16 md:h-16'>
+                      {technology.icon}
+                    </div>
+                    <p className='text-center'>{technology.name}</p>
                   </div>
-                  <p className='text-center'>{technology.name}</p>
-                </div>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>{technology.name}</DialogTitle>
-                  <DialogDescription />
-                </DialogHeader>
-                <p>{technology.description}</p>
-                <DialogFooter>
-                  <DialogClose asChild>
-                    <Button type='button' variant='secondary'>
-                      Close
-                    </Button>
-                  </DialogClose>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          ))}
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>{technology.name}</DialogTitle>
+                    <DialogDescription />
+                  </DialogHeader>
+                  <p>{technology.description}</p>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button type='button' variant='secondary'>
+                        Close
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+            ))}
+          </div>
         </div>
       </div>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox='0 0 1000 100'
+        className='fill-accent bg-background'
+      >
+        <path
+          d='M0 1v99c134.3 0 153.7-99 296-99H0Z'
+          opacity='.5'
+          className='fill-sky-500'
+        ></path>
+        <path
+          d='M1000 4v86C833.3 90 833.3 3.6 666.7 3.6S500 90 333.3 90 166.7 4 0 4h1000Z'
+          opacity='.5'
+          className='fill-sky-500'
+        ></path>
+        <path
+          d='M617 1v86C372 119 384 1 196 1h421Z'
+          opacity='.5'
+          className='fill-sky-500'
+        ></path>
+        <path d='M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z'></path>
+      </svg>
     </div>
   );
 }
