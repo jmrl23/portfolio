@@ -168,7 +168,7 @@ export default function Contact() {
                 <FormControl>
                   <Input
                     className='text-base border-dashed border-2 border-sky-500 focus:border-sky-600'
-                    placeholder='John'
+                    placeholder='John Doe'
                     disabled={isSending}
                     {...field}
                   />
