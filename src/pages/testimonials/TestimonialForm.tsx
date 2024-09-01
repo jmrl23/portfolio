@@ -166,6 +166,7 @@ export default function TestimonialForm({ testimonialKey: key }: Props) {
                 <FormItem>
                   <FormLabel className='font-bold inline-flex items-center space-x-1'>
                     <span className='text-base'>Bio</span>
+                    <AsteriskIcon className='w-4 h-4 text-red-500' />
                   </FormLabel>
                   <FormControl>
                     <Input
