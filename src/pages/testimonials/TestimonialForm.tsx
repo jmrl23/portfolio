@@ -61,6 +61,7 @@ export default function TestimonialForm({ testimonialKey: key }: Props) {
       });
       return;
     }
+    setIsSubmitting(true);
     const formData = new FormData();
     formData.append('key', key);
     if (image) formData.append('image', image);
@@ -77,13 +78,14 @@ export default function TestimonialForm({ testimonialKey: key }: Props) {
       });
       toast.success('testimonial created!');
       setIsSubmitSuccess(true);
-      navigate('/');
+      setTimeout(() => {
+        navigate('/');
+      }, 1200);
     } catch (error) {
       console.error(error);
       if (error instanceof Error) {
         toast.error(error.message);
       }
-    } finally {
       setIsSubmitting(false);
     }
   }
