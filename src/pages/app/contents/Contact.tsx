@@ -59,11 +59,7 @@ export default function Contact() {
   async function handleRemoveAttachments() {
     try {
       const ids = attachments.map((attachment) => attachment.id).join('&id=');
-      await api.delete('/files/delete?id=' + ids, {
-        headers: {
-          authorization: `Bearer ${import.meta.env.VITE_FILES_API_KEY}`,
-        },
-      });
+      await api.delete('/files/delete?id=' + ids);
     } catch (error) {
       console.error(error);
     } finally {
@@ -87,21 +83,13 @@ export default function Contact() {
     setIsSending(true);
 
     try {
-      await api.post(
-        '/emails/send',
-        {
-          text: content,
-          to: [import.meta.env.VITE_EMAILS_RECEIVER],
-          attachments: attachments.map((attachment) => ({
-            path: attachment.url,
-          })),
-        },
-        {
-          headers: {
-            authorization: `Bearer ${import.meta.env.VITE_EMAILS_API_KEY}`,
-          },
-        },
-      );
+      await api.post('/emails/send', {
+        text: content,
+        to: [import.meta.env.VITE_EMAILS_RECEIVER],
+        attachments: attachments.map((attachment) => ({
+          path: attachment.url,
+        })),
+      });
       toast.success('message sent');
       form.setValue('email', '');
       form.setValue('name', '');
@@ -258,13 +246,6 @@ async function uploadFiles(files: File[]): Promise<$File[]> {
     const response = await api.post<{ data: $File[] }>(
       '/files/upload',
       formData,
-      {
-        headers: {
-          'content-type': 'multipart/form-data',
-          authorization: `Bearer ${import.meta.env.VITE_FILES_API_KEY}`,
-        },
-        signal: AbortSignal.timeout(1000 * 60 * 2),
-      },
     );
     const { data: files } = response.data;
     return files;

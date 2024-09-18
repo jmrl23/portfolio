@@ -9,8 +9,8 @@ type ThemeProviderProps = {
 
 export default function ThemeProvider({
   children,
-  defaultTheme = 'dark',
-  storageKey = 'vite-ui-theme',
+  defaultTheme = 'light',
+  storageKey = 'jomariel.portfolio.theme',
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(

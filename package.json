@@ -22,6 +22,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.1.8",
+    "http-proxy-middleware": "^3.0.2",
     "json-schema-to-ts": "^3.1.0",
     "lucide-react": "^0.420.0",
     "react": "^18.3.1",
@@ -36,7 +37,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
-    "@types/node": "^22.0.3",
+    "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.15.0",

@@ -14,9 +14,6 @@ async function fetchProjects(payload: ProjectListPayload): Promise<Project[]> {
   try {
     const response = await api.get<{ data: Project[] }>('/projects', {
       params: payload,
-      headers: {
-        authorization: `Bearer ${import.meta.env.VITE_PROJECTS_API_KEY}`,
-      },
     });
     const { data: projects } = response.data;
     return projects;
