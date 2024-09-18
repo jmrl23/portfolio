@@ -1,6 +1,14 @@
 # portfolio
 
 <picture>
-  <source srcset="https://ik.imagekit.io/0x17/portfolio/Screenshot_from_2024-08-07_23-03-58_J2DENSml7.png" media="(prefers-color-scheme: dark)" />
-  <img src="https://ik.imagekit.io/0x17/portfolio/Screenshot_from_2024-08-07_23-06-14_6VvhNU6bJ.png" />
+  <source srcset="./screenshots/screenshot-dark.png" media="(prefers-color-scheme: dark)" />
+  <img src="./screenshots/screenshot.png" />
 </picture>
+
+## built-with
+
+- react
+
+## extras
+
+- [backend repo](https://github.com/jmrl23/portfolio-backend)
