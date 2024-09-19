@@ -51,29 +51,14 @@ export default function Contact() {
     },
   });
   const [isSending, setIsSending] = useState<boolean>(false);
-  const [isUploading, setIsUploading] = useState<boolean>(false);
-  const [attachments, setAttachments] = useState<{ id: string; url: string }[]>(
-    [],
-  );
-
-  async function handleRemoveAttachments() {
-    try {
-      const ids = attachments.map((attachment) => attachment.id).join('&id=');
-      await api.delete('/files/delete?id=' + ids);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      toast.success(`Attachment${attachments.length > 1 ? 's' : ''} removed`);
-      setAttachments([]);
-    }
-  }
+  const [files, setFiles] = useState<File[]>([]);
 
   async function onSubmit({
     email,
     name,
     message,
   }: z.infer<typeof formSchema>) {
-    if (isSending || isUploading) return;
+    if (isSending) return;
 
     let content = '';
     content += `email: ${email.trim()}\n`;
@@ -83,6 +68,7 @@ export default function Contact() {
     setIsSending(true);
 
     try {
+      const attachments = await uploadFiles(files);
       await api.post('/emails/send', {
         text: content,
         to: [import.meta.env.VITE_EMAILS_RECEIVER],
@@ -99,7 +85,7 @@ export default function Contact() {
       toast.error('an error occurs');
     } finally {
       setIsSending(false);
-      setAttachments([]);
+      setFiles([]);
     }
   }
 
@@ -189,12 +175,8 @@ export default function Contact() {
             )}
           />
           <div className='flex mt-6 justify-between'>
-            {attachments.length < 1 ? (
-              <FileUploader
-                isUploading={isUploading}
-                setIsUploading={setIsUploading}
-                setAttachments={setAttachments}
-              />
+            {files.length < 1 ? (
+              <FileUploader setFiles={setFiles} isSending={isSending} />
             ) : (
               <TooltipProvider>
                 <Tooltip>
@@ -203,13 +185,19 @@ export default function Contact() {
                       variant={'outline'}
                       className='rounded-full px-3'
                       type='button'
-                      onClick={handleRemoveAttachments}
+                      onClick={() => {
+                        toast.success(
+                          (files.length > 1 ? 'Attachments' : 'Attachment') +
+                            ' removed',
+                        );
+                        setFiles([]);
+                      }}
                     >
                       <FileX2Icon className='w-4 h-4' />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    {attachments.length > 1
+                    {files.length > 1
                       ? 'Remove attached files'
                       : 'Remove attached file'}
                   </TooltipContent>
@@ -261,36 +249,23 @@ async function uploadFiles(files: File[]): Promise<$File[]> {
 }
 
 interface FileUploaderProps {
-  isUploading: boolean;
-  setIsUploading: (value: boolean) => void;
-  setAttachments: (attachments: { id: string; url: string }[]) => void;
+  setFiles: (files: File[]) => void;
+  isSending: boolean;
 }
 
-function FileUploader({
-  isUploading,
-  setIsUploading,
-  setAttachments,
-}: FileUploaderProps) {
+function FileUploader({ setFiles, isSending }: FileUploaderProps) {
   const ref = useRef<HTMLInputElement>(null);
 
-  async function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    if (isUploading || e.target.files?.length === undefined) return;
-    const files = [...e.target.files[Symbol.iterator]()];
+  function handleOnChange(event: ChangeEvent<HTMLInputElement>) {
+    event.preventDefault();
+    if (event.target.files?.length === undefined) return;
+    const files = [...event.target.files[Symbol.iterator]()];
     if (files.length > 5) {
       toast.error('Only allowed to attach up to 5 files');
       return;
     }
-    setIsUploading(true);
-    const uploadedFiles = await uploadFiles(files);
-    setAttachments(
-      uploadedFiles.map((file) => ({ id: file.id, url: file.url })),
-    );
-    setIsUploading(false);
-    if (uploadedFiles.length < 1) return;
-    toast.success(
-      uploadedFiles.length > 1 ? 'Files attached' : 'File attached',
-    );
+    setFiles(files);
+    toast.success(files.length > 1 ? 'Files attached' : 'File attached');
   }
 
   return (
@@ -299,17 +274,21 @@ function FileUploader({
         type='file'
         ref={ref}
         className='hidden'
-        onChange={handleOnChange}
         multiple
+        onChange={handleOnChange}
       />
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
               variant={'outline'}
-              className='rounded-full px-3'
+              className={cn(
+                'rounded-full px-3',
+                isSending && 'pointer-events-none',
+              )}
               type='button'
               onClick={() => ref.current?.click()}
+              disabled={isSending}
             >
               <FilesIcon className='w-4 h-4' />
             </Button>
