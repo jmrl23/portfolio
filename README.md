@@ -1,8 +1,8 @@
 # portfolio
 
 <picture>
-  <source srcset="./screenshots/screenshot-dark.png" media="(prefers-color-scheme: dark)" />
-  <img src="./screenshots/screenshot.png" />
+  <source srcset="./public/screenshot-dark.png" media="(prefers-color-scheme: dark)" />
+  <img src="./public/screenshot.png" />
 </picture>
 
 ## built-with
