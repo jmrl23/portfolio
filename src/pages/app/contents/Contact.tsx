@@ -183,8 +183,12 @@ export default function Contact() {
                   <TooltipTrigger asChild>
                     <Button
                       variant={'outline'}
-                      className='rounded-full px-3'
+                      className={cn(
+                        'rounded-full px-3',
+                        isSending && 'pointer-events-none',
+                      )}
                       type='button'
+                      disabled={isSending}
                       onClick={() => {
                         toast.success(
                           (files.length > 1 ? 'Attachments' : 'Attachment') +
