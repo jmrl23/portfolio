@@ -23,6 +23,7 @@ export default function Introduction() {
               className='rounded-3xl w-[150px] md:w-[300px] lg:w-[400px] shadow-sm'
               width={300}
               height={300}
+              loading='lazy'
             />
           </div>
           <div className='space-y-6 text-center md:text-left md:mr-4'>

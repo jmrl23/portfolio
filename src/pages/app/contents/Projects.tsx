@@ -179,6 +179,7 @@ function ProjectCard({ project }: ProjectCardProps) {
                         width={200}
                         height={200}
                         className='w-full rounded-3xl aspect-video object-contain'
+                        loading='lazy'
                       />
                     </CardContent>
                   </Card>
