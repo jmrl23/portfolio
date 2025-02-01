@@ -2,6 +2,7 @@ import Contact from '@/pages/app/contents/Contact';
 import Introduction from '@/pages/app/contents/Introduction';
 import Projects from '@/pages/app/contents/Projects';
 import Technologies from '@/pages/app/contents/Technologies';
+import Testimonials from '@/pages/app/contents/Testimonials';
 import Footer from '@/pages/app/Footer';
 import Navigation from '@/pages/app/Navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -27,6 +28,11 @@ const contents: Content[] = [
     id: 'projects',
     name: 'Projects',
     element: <Projects key={'projects'} />,
+  },
+  {
+    id: 'testimonials',
+    name: 'Testimonials',
+    element: <Testimonials key={'testimonials'} />,
   },
   {
     id: 'contact',
