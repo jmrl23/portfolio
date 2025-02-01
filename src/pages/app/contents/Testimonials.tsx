@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -15,7 +14,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import useTestimonials, { Testimonial } from '@/hooks/useTestimonials';
 import { cn } from '@/lib/utils';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 export default function Testimonials() {
   const { data: testimonials, isLoading } = useTestimonials();
@@ -23,7 +22,7 @@ export default function Testimonials() {
   return (
     <div>
       <div>
-        <div className='container py-6' id='testimonials'>
+        <div className='container pt-6 pb-0 lg:pb-6' id='testimonials'>
           <h1 className='font-extrabold text-4xl'>Testimonials</h1>
           <div className='fill-foreground py-8 mx-auto'>
             <Carousel opts={{ loop: true, align: 'start' }}>
@@ -72,17 +71,7 @@ export default function Testimonials() {
 }
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
-  const contentRef = useRef<HTMLParagraphElement>(null);
-  const [isClamped, setIsClamped] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (
-      contentRef.current &&
-      contentRef.current.scrollHeight > contentRef.current.clientHeight
-    ) {
-      setIsClamped(true);
-    }
-  }, []);
+  const [isClamped, setIsClamped] = useState<boolean>(true);
 
   return (
     <Card>
@@ -103,19 +92,14 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
           &ldquo;
         </span>
         <p
-          className={cn('text-base', isClamped && 'line-clamp-3')}
-          ref={contentRef}
-          onClick={() => !isClamped && setIsClamped(true)}
+          className={cn(
+            'text-base cursor-pointer',
+            isClamped && 'line-clamp-3',
+          )}
+          onClick={() => setIsClamped((value) => !value)}
         >
           {testimonial.content}
         </p>
-        {isClamped && (
-          <div className='flex justify-end mt-4'>
-            <Button variant={'ghost'} onClick={() => setIsClamped(false)}>
-              See more
-            </Button>
-          </div>
-        )}
       </CardContent>
     </Card>
   );
