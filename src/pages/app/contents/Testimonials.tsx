@@ -18,8 +18,7 @@ import { cn } from '@/lib/utils';
 import { useEffect, useRef, useState } from 'react';
 
 export default function Testimonials() {
-  const { data: testimonials } = useTestimonials();
-  const isLoading = true;
+  const { data: testimonials, isLoading } = useTestimonials();
 
   return (
     <div>
