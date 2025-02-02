@@ -15,6 +15,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import useTestimonials, { Testimonial } from '@/hooks/useTestimonials';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
+import autoPlay from 'embla-carousel-autoplay';
 
 export default function Testimonials() {
   const { data: testimonials, isLoading } = useTestimonials();
@@ -25,7 +26,17 @@ export default function Testimonials() {
         <div className='container pt-6 pb-0 lg:pb-6' id='testimonials'>
           <h1 className='font-extrabold text-4xl'>Testimonials</h1>
           <div className='fill-foreground py-8 mx-auto'>
-            <Carousel opts={{ loop: true, align: 'start' }}>
+            <Carousel
+              opts={{ loop: true, align: 'start' }}
+              plugins={[
+                autoPlay({
+                  delay: 3000,
+                  stopOnInteraction: false,
+                  stopOnFocusIn: true,
+                  stopOnMouseEnter: true,
+                }),
+              ]}
+            >
               <CarouselContent>
                 {isLoading || testimonials.length < 1
                   ? Array.from({ length: 3 }).map((_, index) => (
