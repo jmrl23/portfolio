@@ -118,6 +118,8 @@ interface ProjectCardProps {
 function ProjectCard({ project }: ProjectCardProps) {
   const [currentImage, setCurrentImage] = useState<number>(0);
   const [isViewerOpen, setIsViewerOpen] = useState<boolean>(false);
+  const [isDescriptionClamped, setIsDescriptionClamped] =
+    useState<boolean>(true);
 
   function openImageViewer(index: number) {
     setCurrentImage(index);
@@ -202,7 +204,13 @@ function ProjectCard({ project }: ProjectCardProps) {
             </>
           )}
         </Carousel>
-        <CardDescription className='text-foreground text-base'>
+        <CardDescription
+          className={cn(
+            'text-foreground text-base cursor-pointer',
+            isDescriptionClamped && 'line-clamp-2',
+          )}
+          onClick={() => setIsDescriptionClamped((state) => !state)}
+        >
           {project.description}
         </CardDescription>
       </CardHeader>
