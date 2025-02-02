@@ -32,7 +32,14 @@ export default function Technologies() {
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle>{technology.name}</DialogTitle>
+                    <DialogTitle>
+                      <div className='w-full flex items-center space-x-4'>
+                        <span className='w-[30px] fill-foreground'>
+                          {technology.icon}
+                        </span>
+                        <span>{technology.name}</span>
+                      </div>
+                    </DialogTitle>
                     <DialogDescription />
                   </DialogHeader>
                   <p>{technology.description}</p>
