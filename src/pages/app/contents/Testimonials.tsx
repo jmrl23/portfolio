@@ -25,6 +25,9 @@ export default function Testimonials() {
       <div>
         <div className='container pt-6 pb-0 lg:pb-6' id='testimonials'>
           <h1 className='font-extrabold text-4xl'>Testimonials</h1>
+          <p className='leading-loose text-muted-foreground my-6'>
+            What other say about working with me
+          </p>
           <div className='fill-foreground py-8 mx-auto'>
             <Carousel
               opts={{ loop: true, align: 'start' }}

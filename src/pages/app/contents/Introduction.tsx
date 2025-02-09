@@ -31,9 +31,8 @@ export default function Introduction() {
               Hi, I am Jomariel Gaitera
             </h2>
             <p className='leading-10 text-xl'>
-              I enjoy creating web applications with strong backend systems. I
-              aim to build efficient, effective, and reliable websites. Let's
-              make something great together!
+              I enjoy building robust and reliable web applications using
+              cutting-edge technologies
             </p>
             <div className='flex flex-col md:flex-row gap-6 items-center'>
               <Button

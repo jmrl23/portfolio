@@ -93,7 +93,7 @@ export default function Contact() {
     <div className='container py-6' id='contact'>
       <h1 className='font-extrabold text-4xl'>Contact</h1>
       <p className='leading-loose text-muted-foreground mt-6 mb-10'>
-        Reach me out directly at{' '}
+        Let's connect and discuss your project. Reach me at{' '}
         <a
           className='underline decoration-orange-500 hover:decoration-sky-500 hover:text-foreground underline-offset-8'
           href='mailto:gaiterajomariel@gmail.com'

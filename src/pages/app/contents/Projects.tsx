@@ -53,7 +53,7 @@ export default function Projects() {
       <div className='container pt-6' id='projects'>
         <h1 className='font-extrabold text-4xl mb-6'>Projects</h1>
         <p className='leading-loose text-muted-foreground my-6'>
-          Here are some of my projects
+          Some of my public works
         </p>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           {isLoading &&
